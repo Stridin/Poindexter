@@ -1,42 +1,29 @@
+#include <algorithm>
 
-int SumPoindexter( int* p )
+int SumPoindexter( int* arr )
 {
-	// NOTE: const int* const p
-	// const int* p means value pointedd at cant be modified
-	// int* const p meant pointer cant be redirected
+	int* ptr = arr;
 	int sum = 0;
-	for ( int* e = p + sizeof( p ); p <= e; p++ )
+	while ( ptr != arr + sizeof(arr) )
 	{
-		sum += *p;
+		sum += *ptr++;
 	}
 	return sum;
 }
 
+void RevPoindexter( int* pl )
+{
+	for ( int* pr = pl + sizeof( pl ); pl < pr; pl++, pr-- )
+	{
+		std::swap( *pl, *pr );
+	}
+}
+
 int main()
 {
-	int arr[5] = { 2, 4, 12, 7, 15 };
+	int arr[5] = { 1, 2, 3, 4, 5 };
 	int calc = SumPoindexter( arr );
-
-	// int** pp pointer of a pointer
-	// inception
-	int* p = &arr[0];
-	int** pp = &p;
-
-	**pp = 69;
-
-	*pp = &calc;
-
-	*p = 64;
-
-	// Type Punning (Strict Aliasing):
-	// "You can do it, but don't do it." -chili
-	float f = 420.0f;
-	int* p2 = reinterpret_cast<int*>( &f );
-	arr[1] = *p;
-
-	// C-Style cast also only reinterpret to char IF unavoidable
-	char* p3 = (char*)&f;
-	arr[2] = *p3;
+	RevPoindexter( arr );
 
 	return 0;
 }
