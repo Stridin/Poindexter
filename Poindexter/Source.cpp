@@ -1,4 +1,4 @@
-#include <iostream>
+#include <algorithm>
 
 int SumPoindexter( int* arr )
 {
@@ -11,16 +11,12 @@ int SumPoindexter( int* arr )
 	return sum;
 }
 
-void RevPoindexter( int* arr )
+void RevPoindexter( int* pl )
 {
-	int* pTmp = new int;
-	for ( int* ptr = arr; ptr <= arr + sizeof( arr ) / 2; ptr++ )
+	for ( int* pr = pl + sizeof( pl ); pl < pr; pl++, pr-- )
 	{
-		*pTmp = arr[ptr - arr]; // adr after the array as temp = ascending
-		arr[ptr - arr] = arr[sizeof(arr) - (ptr - arr)]; // adr at ascending = descending
-		arr[sizeof(arr) - (ptr - arr)] = *pTmp; // adr at descending = temp
+		std::swap( *pl, *pr );
 	}
-	delete pTmp;
 }
 
 int main()
