@@ -1,11 +1,10 @@
 
-int SumPoindexter( int arr[] )
+int SumPoindexter( int* p )
 {
-	int* ptr = arr;
 	int sum = 0;
-	while ( ptr != arr + sizeof(arr) )
+	for ( int i = 0; i <= sizeof( p ); i++ )
 	{
-		sum += *ptr++;
+		sum += p[i];
 	}
 	return sum;
 }
