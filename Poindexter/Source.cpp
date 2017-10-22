@@ -2,9 +2,9 @@
 int SumPoindexter( int* p )
 {
 	int sum = 0;
-	for ( int i = 0; i <= sizeof( p ); i++ )
+	for ( int* e = p + sizeof( p ); p <= e; p++ )
 	{
-		sum += p[i];
+		sum += *p;
 	}
 	return sum;
 }
