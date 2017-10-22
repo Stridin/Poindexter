@@ -18,6 +18,7 @@ int main()
 	int calc = SumPoindexter( arr );
 
 	// int** pp pointer of a pointer
+	// inception
 	int* p = &arr[0];
 	int** pp = &p;
 
@@ -26,6 +27,16 @@ int main()
 	*pp = &calc;
 
 	*p = 64;
+
+	// Type Punning (Strict Aliasing):
+	// "You can do it, but don't do it." -chili
+	float f = 420.0f;
+	int* p2 = reinterpret_cast<int*>( &f );
+	arr[1] = *p;
+
+	// C-Style cast also only reinterpret to char IF unavoidable
+	char* p3 = (char*)&f;
+	arr[2] = *p3;
 
 	return 0;
 }
